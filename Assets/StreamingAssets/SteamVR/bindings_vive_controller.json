@@ -107,7 +107,7 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/interactui"
+                     "output" : "/actions/default/in/teleport"
                   }
                },
                "mode" : "button",
