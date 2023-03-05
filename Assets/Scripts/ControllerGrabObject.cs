@@ -9,6 +9,8 @@ public class ControllerGrabObject : MonoBehaviour
     public SteamVR_Behaviour_Pose controllerPose;
     public SteamVR_Action_Boolean grabAction;
 
+    public float bulletSpeed;
+
     private GameObject collidingObject; 
     private GameObject objectInHand; 
     // Update is called once per frame
@@ -16,10 +18,9 @@ public class ControllerGrabObject : MonoBehaviour
     {
             if (grabAction.GetLastStateDown(handType))
             {   
-                print("enter grab action");
+                print("grab");
                 if (collidingObject)
                 {
-                print("colliding object");
                 GrabObject();
                 }
             }
@@ -28,7 +29,7 @@ public class ControllerGrabObject : MonoBehaviour
             {
                 if (objectInHand)
                 {
-                ReleaseObject();
+                ShootObject();
                 }
             }
     }
@@ -77,15 +78,14 @@ public class ControllerGrabObject : MonoBehaviour
         return fx;
     }
 
-    private void ReleaseObject()
+    private void ShootObject()
     {
         if (GetComponent<FixedJoint>())
         {
             GetComponent<FixedJoint>().connectedBody = null;
             Destroy(GetComponent<FixedJoint>());
-            objectInHand.GetComponent<Rigidbody>().velocity = controllerPose.GetVelocity();
-            objectInHand.GetComponent<Rigidbody>().angularVelocity = controllerPose.GetAngularVelocity();
-
+            Rigidbody objToShoot = objectInHand.GetComponent<Rigidbody>();
+            objToShoot.AddForce(controllerPose.transform.forward * bulletSpeed,ForceMode.Impulse);
         }
         objectInHand = null;
     }

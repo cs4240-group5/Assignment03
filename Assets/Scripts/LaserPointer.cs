@@ -82,6 +82,7 @@ public class LaserPointer : MonoBehaviour
         reticle.SetActive(false);
         Vector3 difference = cameraRigTransform.position - headTransform.position;
         difference.y = 0;
+        hitPoint.y = 0;
         cameraRigTransform.position = hitPoint + difference;
     }
 }
