@@ -85,7 +85,7 @@ public class ControllerGrabObject : MonoBehaviour
             GetComponent<FixedJoint>().connectedBody = null;
             Destroy(GetComponent<FixedJoint>());
             Rigidbody objToShoot = objectInHand.GetComponent<Rigidbody>();
-            objToShoot.AddForce(objToShoot.transform.forward * bulletSpeed,ForceMode.Impulse);
+            objToShoot.AddForce(controllerPose.transform.forward * bulletSpeed,ForceMode.Impulse);
         }
         objectInHand = null;
     }
