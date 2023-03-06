@@ -1,0 +1,1 @@
+To increase hitbox of the grab, increase the size of the 2D collider.
