@@ -8,7 +8,6 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance;
 
     public Text scoreText;
-
     int score = 0;
 
     public void Awake() {
@@ -22,7 +21,8 @@ public class ScoreManager : MonoBehaviour
     }
 
     public void AddPoint() {
-        score += 1;
+        score += 10;
         scoreText.text = "Score: " + score.ToString();
     }
+    
 }

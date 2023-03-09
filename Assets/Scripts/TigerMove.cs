@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class TigerMove : MonoBehaviour
 {
-    public float speed = 0.1f; 
+    public float speed = 1f; 
     private Animator animator; 
     private Vector3 movementDirection = Vector3.forward; 
+    public int counter = 0;
 
     void Start()
     {
@@ -16,9 +17,19 @@ public class TigerMove : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(movementDirection * speed * Time.deltaTime, Space.World); // Move the object forward
-        transform.Rotate(new Vector3(0,0.05f,0));
-        movementDirection = transform.forward;
+        if (counter <= 500)
+        {
+            counter++;
+            transform.Translate(movementDirection * speed * Time.deltaTime, Space.World); // Move the object forward
+            //transform.Rotate(new Vector3(0,0.5f,0));
+            movementDirection = transform.forward;
+        }
+        else 
+        {
+            counter = 0;
+            transform.Rotate(new Vector3(0,180.0f,0));
+            movementDirection = transform.forward;
+        }
         
 
         /*if (counter > 400)
