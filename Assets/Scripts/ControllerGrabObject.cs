@@ -12,7 +12,9 @@ public class ControllerGrabObject : MonoBehaviour
     public float bulletSpeed;
 
     private GameObject collidingObject; 
-    private GameObject objectInHand; 
+    private GameObject objectInHand;
+    public AudioClip grabAudio;
+    public AudioClip shootAudio;
     // Update is called once per frame
     void Update()
     {
@@ -62,8 +64,9 @@ public class ControllerGrabObject : MonoBehaviour
 
         collidingObject = null;
     }
-        private void GrabObject()
+    private void GrabObject()
     {
+        AudioSource.PlayClipAtPoint(grabAudio, transform.position);
         objectInHand = collidingObject;
         collidingObject = null;
         var joint = AddFixedJoint();
@@ -82,6 +85,7 @@ public class ControllerGrabObject : MonoBehaviour
     {
         if (GetComponent<FixedJoint>())
         {
+            AudioSource.PlayClipAtPoint(shootAudio, transform.position);
             GetComponent<FixedJoint>().connectedBody = null;
             Destroy(GetComponent<FixedJoint>());
             Rigidbody objToShoot = objectInHand.GetComponent<Rigidbody>();
