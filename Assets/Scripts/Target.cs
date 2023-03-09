@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
+    private ScoreManager scoreManager;
     // Start is called before the first frame update
     void Start()
     {
-        
+        scoreManager = GameObject.Find("Score Manager").GetComponent<ScoreManager>();
     }
 
     // Update is called once per frame
@@ -19,12 +20,24 @@ public class Target : MonoBehaviour
     // Destroy the target on contact with a bullet
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            Destroy(gameObject);
+        //Update Score
+        int addPoint = 0;
 
-            //Update Score
-            ScoreManager.instance.AddPoint();
+        if (gameObject.CompareTag("lb_bird") && collision.gameObject.CompareTag("bread")){
+            addPoint = 20;
+            Destroy(gameObject);
+        } else if (gameObject.CompareTag("tiger") && collision.gameObject.CompareTag("chicken")) {
+            addPoint = 15;
+            Destroy(gameObject);
+        } else if (gameObject.CompareTag("rabbit") && collision.gameObject.CompareTag("carrot")) {
+            addPoint = 10;
+            Destroy(gameObject);
+        } else if (gameObject.CompareTag("bear") && collision.gameObject.CompareTag("fish")) {
+            addPoint = 5;
+            Destroy(gameObject);
         }
+
+        scoreManager.AddPoint(addPoint);
+        //ScoreManager.instance.AddPoint(addPoint);
     }
 }

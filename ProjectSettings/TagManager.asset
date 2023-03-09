@@ -6,6 +6,18 @@ TagManager:
   tags:
   - Floor
   - Bullet
+  - projectile
+  - FxTemporaire
+  - lb_bird
+  - lb_groundTarget
+  - lb_perchTarget
+  - bear
+  - tiger
+  - rabbit
+  - chicken
+  - fish
+  - bread
+  - carrot
   layers:
   - Default
   - TransparentFX
