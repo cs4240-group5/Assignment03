@@ -3,7 +3,8 @@ guid: f11d8f8f7fab40f46a5973bfd338c688
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - squish: {fileID: 8300000, guid: bccac6de6b4c3d244aa5282c2f328ed4, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

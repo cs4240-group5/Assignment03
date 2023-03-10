@@ -12,7 +12,8 @@ public class LaserPointer : MonoBehaviour
     public GameObject laserPrefab; 
     private GameObject laser; 
     private Transform laserTransform; 
-    private Vector3 hitPoint; 
+    private Vector3 hitPoint;
+    public AudioClip teleportAudio;
 
     // teleport variables
     public Transform cameraRigTransform; 
@@ -78,10 +79,11 @@ public class LaserPointer : MonoBehaviour
     // teleport method
     private void Teleport()
     {
+        AudioSource.PlayClipAtPoint(teleportAudio, transform.position);
         shouldTeleport = false;
         reticle.SetActive(false);
         Vector3 difference = cameraRigTransform.position - headTransform.position;
-        difference.y = 0;
+        difference.y = 3;
         hitPoint.y = 0;
         cameraRigTransform.position = hitPoint + difference;
     }

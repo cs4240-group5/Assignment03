@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.myproject1.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\Users\\E0406815\\Desktop\\CS4240\\Assignment3\\Assignment03\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "C:\\Users\\e0406828\\Desktop\\assign3\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "My project (1) [Testing]"

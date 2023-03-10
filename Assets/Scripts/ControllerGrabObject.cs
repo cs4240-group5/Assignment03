@@ -11,8 +11,29 @@ public class ControllerGrabObject : MonoBehaviour
 
     public float bulletSpeed;
 
-    private GameObject collidingObject; 
-    private GameObject objectInHand; 
+    public Vector3 breadOriginalPosition;
+    public Vector3 chickenOriginalPosition;
+    public Vector3 carrotOriginalPosition;
+    public Vector3 fishOriginalPosition;
+    public GameObject collidingObject; 
+    public GameObject objectInHand;
+    public GameObject objectThrown;
+    public AudioClip grabAudio;
+    public AudioClip shootAudio;
+    private bool shot;
+
+    float timer = 0f;
+    int waitingTime = 2;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        breadOriginalPosition = GameObject.FindGameObjectsWithTag("bread")[0].transform.position;
+        chickenOriginalPosition = GameObject.FindGameObjectsWithTag("chicken")[0].transform.position;
+        carrotOriginalPosition = GameObject.FindGameObjectsWithTag("carrot")[0].transform.position;
+        fishOriginalPosition = GameObject.FindGameObjectsWithTag("fish")[0].transform.position;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -25,14 +46,41 @@ public class ControllerGrabObject : MonoBehaviour
                 }
             }
 
-            if (grabAction.GetLastStateUp(handType))
+        if (grabAction.GetLastStateUp(handType))
+        {
+            if (objectInHand)
             {
-                if (objectInHand)
-                {
                 ShootObject();
-                }
+                shot = true;
             }
+        }
+        if (shot)
+        {
+            timer += Time.deltaTime;
+            if (timer > waitingTime)
+            {
+                if (objectThrown.CompareTag("bread"))
+                {
+                    objectThrown.transform.position = breadOriginalPosition;
+                }
+                if (objectThrown.CompareTag("chicken"))
+                {
+                    objectThrown.transform.position = chickenOriginalPosition;
+                }
+                if (objectThrown.CompareTag("carrot"))
+                {
+                    objectThrown.transform.position = carrotOriginalPosition;
+                }
+                if (objectThrown.CompareTag("fish"))
+                {
+                    objectThrown.transform.position = fishOriginalPosition;
+                }
+                timer = 0;
+                shot = false;
+            }
+        }                                                                                                                                                                                                                                                                                                                                                                                                                       
     }
+    
 
     private void SetCollidingObject(Collider col)
     {
@@ -62,11 +110,14 @@ public class ControllerGrabObject : MonoBehaviour
 
         collidingObject = null;
     }
-        private void GrabObject()
+    private void GrabObject()
     {
+        AudioSource.PlayClipAtPoint(grabAudio, transform.position);
         objectInHand = collidingObject;
+        objectThrown = objectInHand;
         collidingObject = null;
         var joint = AddFixedJoint();
+        //objOriginalPosition = objectInHand.transform.position;
         joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
     }
 
@@ -82,6 +133,7 @@ public class ControllerGrabObject : MonoBehaviour
     {
         if (GetComponent<FixedJoint>())
         {
+            AudioSource.PlayClipAtPoint(shootAudio, transform.position);
             GetComponent<FixedJoint>().connectedBody = null;
             Destroy(GetComponent<FixedJoint>());
             Rigidbody objToShoot = objectInHand.GetComponent<Rigidbody>();
@@ -89,4 +141,5 @@ public class ControllerGrabObject : MonoBehaviour
         }
         objectInHand = null;
     }
+
 }
