@@ -46,7 +46,7 @@ public class Target : MonoBehaviour
             AudioSource.PlayClipAtPoint(failureAudio, transform.position);
         }
 
-        scoreManager.AddPoint(addPoint);
-        //ScoreManager.instance.AddPoint(addPoint);
+        //scoreManager.AddPoint(addPoint);
+        ScoreManager.instance.AddPoint(addPoint);
     }
 }
