@@ -17,7 +17,7 @@ public class TigerBearMove : MonoBehaviour
     void Update()
     {
         transform.Translate(movementDirection * speed * Time.deltaTime, Space.World); // Move the object forward
-        transform.Rotate(new Vector3(0,0.05f,0));
+        transform.Rotate(new Vector3(0,0.1f,0));
         movementDirection = transform.forward;
         
 
